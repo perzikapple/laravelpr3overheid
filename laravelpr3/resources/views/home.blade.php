@@ -24,7 +24,11 @@
         <input type="hidden" name="longitude" id="longitude">
 
         <button type="button" id="locateBtn">Use my location</button>
-        <button type="submit">Send Report</button>
+        <form action="{{ Route('/laravelpr3overheid/laravelpr3/resources/views/home.blade.php') }}" method="POST">
+            @csrf
+            <button type="submit">Verstuur melding</button>
+        </form>
+
     </form>
     <div id="map" style="height: 350px; margin-top: 24px; border-radius: 8px;"></div>
 </div>
