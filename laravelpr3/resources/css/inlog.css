@@ -1,12 +1,41 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f3f4f6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 0;
     height: 100vh;
+    display: flex;
+    flex-direction: column; /* Zorgt dat navbar bovenaan staat */
 }
 
+/* --- NAVBAR --- */
+.navbar {
+    background: #222;
+    color: #fff;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+/* --- CENTREREN VAN LOGIN --- */
+.main-content {
+    flex: 1; /* Vult resterende ruimte onder navbar */
+    display: flex;
+    justify-content: center; /* Horizontaal centreren */
+    align-items: center;     /* Verticaal centreren */
+}
+
+/* --- LOGIN FORM STYLING --- */
 .login-container {
     background: #fff;
     padding: 30px;

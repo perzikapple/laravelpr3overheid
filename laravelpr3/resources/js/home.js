@@ -26,10 +26,6 @@ document.getElementById('locateBtn').addEventListener('click', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     const passwordInput = document.getElementById('password');
-
-    // Eenvoudig voorbeeld: toon wachtwoord bij dubbelklik
-    passwordInput.addEventListener('dblclick', function () {
-        this.type = this.type === 'password' ? 'text' : 'password';
-    });
+    
 });
 

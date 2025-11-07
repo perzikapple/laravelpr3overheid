@@ -8,13 +8,12 @@
 </head>
 <body>
 <div class="navbar">
-    <a href="/login">Login</a>
+    <a href="../views/inlog.blade.php">Login</a>
 </div>
 <div class="container">
     <div id="popupMessage" style="display:none;position:fixed;top:24px;left:50%;transform:translateX(-50%);z-index:9999;padding:16px 32px;border-radius:8px;font-weight:bold;"></div>
     <h2>Submit a Report</h2>
     <form method="POST" action="/home" enctype="multipart/form-data">
-        @csrf
         <label for="description">Description</label>
         <textarea id="description" name="description" required></textarea>
 
