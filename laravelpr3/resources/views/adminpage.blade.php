@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="navbar">
-    <a href="{{ route('home') }}">Home</a>
+    <a href="../views/home.blade.php">Home</a>
 </div>
 
 <div class="container">

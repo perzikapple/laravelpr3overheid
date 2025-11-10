@@ -26,6 +26,8 @@ document.getElementById('locateBtn').addEventListener('click', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     const passwordInput = document.getElementById('password');
-    
+
 });
+
+
 

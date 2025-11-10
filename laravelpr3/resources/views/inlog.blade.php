@@ -15,7 +15,7 @@
 <div class="main-content">
     <div class="login-container">
         <h1>Inloggen</h1>
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="../views/inlog.blade.php">
             <div class="form-group">
                 <label for="email">E-mailadres</label>
                 <input type="email" id="email" name="email" required>

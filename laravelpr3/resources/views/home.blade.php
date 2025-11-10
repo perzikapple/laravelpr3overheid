@@ -17,9 +17,8 @@
 </head>
 <body>
 <div class="container">
-    <div id="popupMessage" style="display:none;position:fixed;top:24px;left:50%;transform:translateX(-50%);z-index:9999;padding:16px 32px;border-radius:8px;font-weight:bold;"></div>
     <h2>Submit a Report</h2>
-    <form method="POST" action="/home" enctype="multipart/form-data">
+    <form method="POST" action="../views/bedankt.blade.php" enctype="multipart/form-data">
         <label for="description">Description</label>
         <textarea id="description" name="description" required></textarea>
 
@@ -30,9 +29,7 @@
         <input type="hidden" name="longitude" id="longitude">
 
         <button type="button" id="locateBtn">Use my location</button>
-        <form action="{{ route('home') }}" method="POST">
-            @csrf
-            <!-- je velden -->
+        <form action="../views/bedankt.blade.php" method="POST">
             <button type="submit">Verstuur melding</button>
         </form>
 
@@ -41,21 +38,5 @@
 </div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="../js/home.js"></script>
-<script>
-    @if(session('success'))
-    showPopup("{{ session('success') }}", "#d4edda", "#155724");
-    @elseif(session('error'))
-    showPopup("{{ session('error') }}", "#f8d7da", "#721c24");
-    @endif
-
-    function showPopup(msg, bg, color) {
-        var popup = document.getElementById('popupMessage');
-        popup.textContent = msg;
-        popup.style.background = bg;
-        popup.style.color = color;
-        popup.style.display = 'block';
-        setTimeout(function(){ popup.style.display = 'none'; }, 3000);
-    }
-</script>
 </body>
 </html>

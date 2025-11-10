@@ -1,0 +1,102 @@
+/* register.css */
+:root{
+    --bg: #f4f7fb;
+    --card: #ffffff;
+    --accent: #007bff;
+    --muted: #666;
+}
+
+* { box-sizing: border-box; }
+body {
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: var(--bg);
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#222;
+}
+
+.auth-wrapper{
+    width:100%;
+    max-width:420px;
+    padding:24px;
+}
+
+.card{
+    background:var(--card);
+    padding:28px;
+    border-radius:12px;
+    box-shadow:0 8px 30px rgba(13,38,76,0.08);
+    border:1px solid rgba(0,0,0,0.03);
+}
+
+h1{
+    margin:0 0 12px;
+    font-size:1.4rem;
+}
+
+.errors{
+    background:#fff4f4;
+    border:1px solid #ffd0d0;
+    color:#9b1c1c;
+    padding:10px;
+    border-radius:6px;
+    margin-bottom:12px;
+}
+
+label{
+    display:block;
+    margin-top:12px;
+    font-size:0.9rem;
+    color:var(--muted);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"]{
+    width:100%;
+    padding:10px 12px;
+    margin-top:6px;
+    border-radius:8px;
+    border:1px solid #e6e9ee;
+    font-size:1rem;
+    background:#fff;
+}
+
+input:focus{
+    outline:none;
+    border-color: rgba(0,123,255,0.6);
+    box-shadow: 0 0 0 4px rgba(0,123,255,0.06);
+}
+
+.btn{
+    width:100%;
+    margin-top:18px;
+    padding:10px 12px;
+    background:var(--accent);
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+    font-size:1rem;
+}
+
+.btn:hover{ filter:brightness(.95); }
+
+.muted{
+    margin-top:14px;
+    font-size:0.9rem;
+    color:var(--muted);
+    text-align:center;
+}
+
+a{ color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* responsive */
+@media (max-width:420px){
+    .card { padding:18px; border-radius:10px; }
+}

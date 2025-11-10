@@ -13,7 +13,7 @@
     <h1>Bedankt voor je melding!</h1>
     <p>We hebben je melding goed ontvangen en gaan ermee aan de slag.</p>
     <form action="../views/home.blade.php">
-        <button>Terug naar vorige pagina</button>
+        <button>nog een melding maken?</button>
     </form>
 
 </div>
