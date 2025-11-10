@@ -2,28 +2,51 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Models\Report;
 
-// Homepagina
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/', function () {
-    return view('home'); // <-- alleen de viewnaam, geen .blade.php
+    return view('home');
 })->name('home');
 
-// Formulier afhandeling
 Route::post('/home', function (Request $request) {
-    try {
-        // hier kun je je melding verwerken
-        return redirect()->route('bedankt');
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Er is iets misgegaan bij het verzenden.');
-    }
+    // Hier kun je eventueel $request->validate([...]) doen
+    Report::create([
+        'title' => $request->input('title', 'Onbekend probleem'),
+        'description' => $request->input('description', ''),
+    ]);
+
+    return redirect()->route('bedankt');
 });
 
-// Bedankt-pagina
-Route::get('/bedankt', function () {
-    return view('bedankt');
-})->name('bedankt');
+Route::get('/bedankt', fn() => view('bedankt'))->name('bedankt');
+Route::get('/inlog', fn() => view('inlog'))->name('inlog');
 
-// Inlogpagina
-Route::get('/inlog', function () {
-    return view('inlog');
-})->name('inlog');
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/admin', function (Request $request) {
+    $sort = $request->query('sort', 'desc');
+    $reports = Report::orderBy('created_at', $sort)->get();
+    return view('admin', compact('reports', 'sort'));
+})->name('admin');
+
+Route::post('/admin/update/{id}', function ($id, Request $request) {
+    $report = Report::findOrFail($id);
+    $report->status = $request->input('status');
+    $report->save();
+    return redirect()->route('admin');
+})->name('admin.update');
+
+Route::delete('/admin/delete/{id}', function ($id) {
+    Report::findOrFail($id)->delete();
+    return redirect()->route('admin');
+})->name('admin.delete');

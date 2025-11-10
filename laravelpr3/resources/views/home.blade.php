@@ -5,11 +5,11 @@
     <title>Home - Report Submission</title>
     <link rel="stylesheet" href="../css/homepage.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <div class="navbar">
+        <a href="../views/inlog.blade.php">Login</a>
+    </div>
 </head>
 <body>
-<div class="navbar">
-    <a href="../views/inlog.blade.php">Login</a>
-</div>
 <div class="container">
     <div id="popupMessage" style="display:none;position:fixed;top:24px;left:50%;transform:translateX(-50%);z-index:9999;padding:16px 32px;border-radius:8px;font-weight:bold;"></div>
     <h2>Submit a Report</h2>
@@ -24,8 +24,9 @@
         <input type="hidden" name="longitude" id="longitude">
 
         <button type="button" id="locateBtn">Use my location</button>
-        <form action="{{ Route('/laravelpr3overheid/laravelpr3/resources/views/home.blade.php') }}" method="POST">
+        <form action="{{ route('home') }}" method="POST">
             @csrf
+            <!-- je velden -->
             <button type="submit">Verstuur melding</button>
         </form>
 
