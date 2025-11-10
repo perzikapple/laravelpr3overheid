@@ -6,7 +6,13 @@
     <link rel="stylesheet" href="../css/homepage.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <div class="navbar">
-        <a href="../views/inlog.blade.php">Login</a>
+@auth
+    @if (Auth::user()->admin)
+        <a href="../views/adminpage.blade.php">Adminpagina</a>
+    @endif
+@endauth
+
+
     </div>
 </head>
 <body>

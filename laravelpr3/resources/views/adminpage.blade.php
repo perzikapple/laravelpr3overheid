@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -7,7 +8,6 @@
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
-
 <div class="navbar">
     <a href="{{ route('home') }}">Home</a>
 </div>
