@@ -4,9 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Registreren</title>
-    <link rel="stylesheet" href="../css/register.css" />
+    <link rel="stylesheet" href="/css/homepage.css">
 </head>
 <body>
+
 <div class="auth-wrapper">
     <div class="card">
         <h1>Maak een account</h1>
@@ -40,9 +41,10 @@
         </form>
 
         <p class="muted">
-            Heb je al een account? <a href="../views/inlog.blade.php">Inloggen</a>
+            Heb je al een account? <a href="{{ route('login') }}">Inloggen</a>
         </p>
     </div>
 </div>
+
 </body>
 </html>

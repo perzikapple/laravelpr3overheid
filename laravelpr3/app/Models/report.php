@@ -11,7 +11,12 @@ class Report extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'latitude', 'longitude', 'photo_path', 'status'
+        'title',
+        'description',
+        'latitude',
+        'longitude',
+        'photo_path',
+        'status',
     ];
 
     public function getPhotoUrlAttribute()

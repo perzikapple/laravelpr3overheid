@@ -3,83 +3,80 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Report;
 use App\Models\User;
 
-/*
-|--------------------------------------------------------------------------
-| Publieke pagina's
-|--------------------------------------------------------------------------
-*/
 
 Route::get('/', function () {
     return view('home');
 })->name('home');
 
-/*
-|--------------------------------------------------------------------------
-| Melding versturen
-|--------------------------------------------------------------------------
-*/
-Route::post('/home', function (Request $request) {
-    // Valideer optioneel
+Route::post('/report', function (Request $request) {
+
     $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'nullable|string|max:2000',
+        'description' => 'required|string|max:2000',
+        'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:4096',
+        'latitude' => 'nullable|numeric',
+        'longitude' => 'nullable|numeric',
     ]);
 
-    // Sla melding op in database
+    $path = null;
+    if ($request->hasFile('photo')) {
+        $path = $request->file('photo')->store('photos', 'public');
+    }
+
     Report::create([
-        'title' => $request->input('title', 'Onbekend probleem'),
-        'description' => $request->input('description', ''),
+        'title' => 'Melding',
+        'description' => $request->description,
         'status' => 'open',
+        'latitude' => $request->latitude,
+        'longitude' => $request->longitude,
+        'photo_path' => $path
     ]);
 
     return redirect()->route('bedankt');
-});
+})->name('report.store');
 
 Route::get('/bedankt', fn() => view('bedankt'))->name('bedankt');
 
-/*
-|--------------------------------------------------------------------------
-| Inlog & registratie
-|--------------------------------------------------------------------------
-*/
 
-Route::get('/inlog', fn() => view('inlog'))->name('login');
+// LOGIN
+Route::get('/inlog', fn() => view('inlog'))->name('login.form');
+Route::post('/inlog', function (Request $request) {
 
-Route::get('/register', fn() => view('register'))->name('register');
+    $credentials = $request->only('email', 'password');
+
+    if (Auth::attempt($credentials)) {
+        return redirect()->route('home');
+    }
+
+    return back()->withErrors(['email' => 'Login gegevens kloppen niet.']);
+})->name('login');
+
+
+// REGISTRATION
+Route::get('/register', fn() => view('register'))->name('register.form');
 
 Route::post('/register', function (Request $request) {
-    $validator = Validator::make($request->all(), [
+    $request->validate([
         'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users,email',
+        'email' => 'required|email|unique:users,email',
         'password' => 'required|string|min:8|confirmed',
     ]);
 
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
-    }
-
-    $user = User::create([
-        'name' => $request->input('name'),
-        'email' => $request->input('email'),
-        'password' => Hash::make($request->input('password')),
+    User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
     ]);
-
-    // Optioneel: log gebruiker meteen in
-    // Auth::login($user);
 
     return redirect()->route('home')->with('success', 'Account aangemaakt!');
 })->name('register.post');
 
-/*
-|--------------------------------------------------------------------------
-| Admin routes
-|--------------------------------------------------------------------------
-*/
 
+// ADMIN
 Route::get('/admin', function (Request $request) {
     $sort = $request->query('sort', 'desc');
     $reports = Report::orderBy('created_at', $sort)->get();
@@ -88,8 +85,13 @@ Route::get('/admin', function (Request $request) {
 
 Route::post('/admin/update/{id}', function ($id, Request $request) {
     $report = Report::findOrFail($id);
-    $report->status = $request->input('status');
+    $report->status = $request->status;
     $report->save();
     return redirect()->route('admin');
 })->name('admin.update');
+
+Route::delete('/admin/delete/{id}', function ($id) {
+    Report::findOrFail($id)->delete();
+    return redirect()->route('admin');
+})->name('admin.delete');
 

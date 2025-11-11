@@ -1,15 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="/css/homepage.css">
 </head>
 <body>
+
 <div class="navbar">
-    <a href="../views/home.blade.php">Home</a>
+    <a href="{{ route('home') }}">Home</a>
 </div>
 
 <div class="container">
@@ -62,6 +62,7 @@
         @endforeach
         </tbody>
     </table>
+
 </div>
 
 </body>
