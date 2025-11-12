@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Melding doen</title>
 
-    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="css/homepage.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
 </head>

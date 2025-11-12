@@ -1,65 +1,89 @@
+@import 'variables.css';
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f6f7fb;
-    margin: 0;
-}
-
-.navbar {
-    background-color: #222;
-    padding: 1rem;
-}
-
-.navbar a {
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
+    background-color: var(--color-bg-subtle);
 }
 
 .container {
-    padding: 2rem;
+    padding: var(--sp-xl);
 }
 
 h1 {
-    margin-bottom: 1rem;
+    margin-bottom: var(--sp-md);
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    border-radius: 8px;
+    background: var(--color-white);
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-lg);
     overflow: hidden;
 }
 
 th, td {
-    padding: 0.75rem;
-    border-bottom: 1px solid #ddd;
+    padding: 0.75rem var(--sp-md);
+    border-bottom: 1px solid var(--color-border);
 }
 
 th {
     background-color: #f1f1f1;
+    font-weight: var(--font-weight-semibold);
+    text-align: left;
+}
+
+tr:hover {
+    background-color: rgba(37, 99, 235, 0.02);
 }
 
 button {
-    background-color: #dc3545;
-    color: white;
+    background-color: var(--color-danger);
+    color: var(--color-text-inverse);
     border: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 5px;
+    padding: var(--sp-sm) var(--sp-md);
+    border-radius: var(--radius-sm);
     cursor: pointer;
+    font-weight: var(--font-weight-semibold);
+    transition: background-color var(--transition-fast);
 }
 
 button:hover {
-    background-color: #c82333;
+    background-color: var(--color-danger-hover);
+}
+
+button:focus {
+    outline: 2px solid var(--color-danger);
+    outline-offset: 1px;
 }
 
 select {
-    padding: 0.3rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+    padding: var(--sp-sm);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-light);
+    cursor: pointer;
+    transition: border-color var(--transition-fast);
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .sort-form {
-    margin-bottom: 1rem;
+    margin-bottom: var(--sp-lg);
+    padding: var(--sp-lg);
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 768px) {
+    table {
+        font-size: var(--font-size-sm);
+    }
+    
+    th, td {
+        padding: 0.5rem var(--sp-sm);
+    }
 }
