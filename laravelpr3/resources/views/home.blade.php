@@ -5,7 +5,7 @@
     <title>Melding doen</title>
 
     <link rel="stylesheet" href="/css/homepage.css">
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
 </head>
 <body>
@@ -25,15 +25,23 @@
     <form method="POST" action="{{ route('report.store') }}" enctype="multipart/form-data">
         @csrf
 
+        <label for="description">Beschrijving</label>
         <textarea name="description" required></textarea>
 
+        <label for="email">E-mail (optioneel)</label>
+        <input type="email" name="email">
+
+        <label for="phone">Telefoonnummer (optioneel)</label>
+        <input type="text" name="phone">
+
+        <label for="photo">Foto (optioneel)</label>
         <input type="file" name="photo" accept="image/*">
 
         <input type="hidden" name="latitude" id="latitude">
         <input type="hidden" name="longitude" id="longitude">
 
-        <button type="button" id="locateBtn">Use my location</button>
-        <button type="submit">Verstuur melding</button>
+        <button type="button" id="locateBtn">Gebruik mijn locatie</button>
+        <button type="submit">Verstuur Melding</button>
     </form>
 
 

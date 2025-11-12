@@ -1,33 +1,57 @@
+let map = L.map('map');
+let marker;
 
-var map = L.map('map').setView([52.2, 5.3], 7);
+// TEGELLAAG
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
+    maxZoom: 19
 }).addTo(map);
 
-var marker;
+// PROBEER DIRECT LOCATIE TE VINDEN BIJ LADEN
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
 
-document.getElementById('locateBtn').addEventListener('click', function () {
+        let lat = position.coords.latitude;
+        let lng = position.coords.longitude;
+
+        // Kaart naar echte locatie zetten
+        map.setView([lat, lng], 15);
+
+        marker = L.marker([lat, lng]).addTo(map).bindPopup("Jouw locatie");
+
+        // Vul inputvelden
+        document.getElementById('latitude').value = lat;
+        document.getElementById('longitude').value = lng;
+
+    }, function() {
+        // Als gebruiker weigert → fallback
+        map.setView([52.3702, 4.8952], 12);
+    });
+} else {
+    map.setView([52.3702, 4.8952], 12);
+}
+
+
+// HANDMATIG LOCATIE KNOP
+document.getElementById('locateBtn').addEventListener('click', function() {
+
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(pos) {
-            var lat = pos.coords.latitude;
-            var lng = pos.coords.longitude;
-            map.setView([lat, lng], 15);
-            if (marker) map.removeLayer(marker);
-            marker = L.marker([lat, lng]).addTo(map).bindPopup('You are here').openPopup();
+        navigator.geolocation.getCurrentPosition(function(position) {
+
+            let lat = position.coords.latitude;
+            let lng = position.coords.longitude;
+
             document.getElementById('latitude').value = lat;
             document.getElementById('longitude').value = lng;
+
+            if (marker) map.removeLayer(marker);
+
+            marker = L.marker([lat, lng]).addTo(map).bindPopup("Jouw locatie");
+            map.setView([lat, lng], 15);
+
         }, function() {
-            document.getElementById('map').innerHTML = 'Unable to get location';
+            alert("Kon locatie niet ophalen.");
         });
     } else {
-        document.getElementById('map').innerHTML = 'Geolocation not supported';
+        alert("GPS niet beschikbaar.");
     }
 });
-
-document.addEventListener('DOMContentLoaded', function () {
-    const passwordInput = document.getElementById('password');
-
-});
-
-
-

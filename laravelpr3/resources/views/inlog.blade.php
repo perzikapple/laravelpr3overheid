@@ -19,7 +19,6 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
-
             <div class="form-group">
                 <label for="email">E-mailadres</label>
                 <input type="email" id="email" name="email" required>
@@ -31,7 +30,11 @@
             </div>
 
             <button type="submit">Inloggen</button>
-
         </form>
 
-        <p>Heb je nog geen account? <a href="{{ route('
+        <a href="{{ route('register.form') }}">Registreer hier</a>
+
+    </div>
+</div>
+</body>
+</html>

@@ -27,8 +27,10 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>Titel</th>
             <th>Beschrijving</th>
+            <th>Email</th>
+            <th>Telefoon</th>
+            <th>Foto</th>
             <th>Status</th>
             <th>Aangemaakt op</th>
             <th>Acties</th>
@@ -38,8 +40,20 @@
         @foreach ($reports as $report)
             <tr>
                 <td>{{ $report->id }}</td>
-                <td>{{ $report->title }}</td>
                 <td>{{ $report->description }}</td>
+                <td>{{ $report->email ?? '-' }}</td>
+                <td>{{ $report->phone ?? '-' }}</td>
+
+                <td>
+                    @if($report->photo_path)
+                        <a href="{{ asset('storage/' . $report->photo_path) }}" target="_blank">
+                            Bekijk foto
+                        </a>
+                    @else
+                        Geen foto
+                    @endif
+                </td>
+
                 <td>
                     <form method="POST" action="{{ route('admin.update', $report->id) }}">
                         @csrf
@@ -50,7 +64,9 @@
                         </select>
                     </form>
                 </td>
+
                 <td>{{ $report->created_at->format('d-m-Y H:i') }}</td>
+
                 <td>
                     <form method="POST" action="{{ route('admin.delete', $report->id) }}" onsubmit="return confirm('Weet je zeker dat je deze melding wilt verwijderen?')">
                         @csrf

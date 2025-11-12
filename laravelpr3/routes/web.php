@@ -28,13 +28,15 @@ Route::post('/report', function (Request $request) {
     }
 
     Report::create([
-        'title' => 'Melding',
         'description' => $request->description,
+        'email' => $request->email,
+        'phone' => $request->phone,
         'status' => 'open',
         'latitude' => $request->latitude,
         'longitude' => $request->longitude,
         'photo_path' => $path
     ]);
+
 
     return redirect()->route('bedankt');
 })->name('report.store');
@@ -61,9 +63,12 @@ Route::get('/register', fn() => view('register'))->name('register.form');
 
 Route::post('/register', function (Request $request) {
     $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|string|min:8|confirmed',
+        'description' => 'required|string|max:2000',
+        'email' => 'nullable|email|max:255',
+        'phone' => 'nullable|string|max:50',
+        'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:4096',
+        'latitude' => 'nullable|numeric',
+        'longitude' => 'nullable|numeric',
     ]);
 
     User::create([
@@ -77,21 +82,50 @@ Route::post('/register', function (Request $request) {
 
 
 // ADMIN
-Route::get('/admin', function (Request $request) {
-    $sort = $request->query('sort', 'desc');
-    $reports = Report::orderBy('created_at', $sort)->get();
-    return view('admin', compact('reports', 'sort'));
-})->name('admin');
+Route::middleware(['auth', 'admin'])->group(function () {
 
-Route::post('/admin/update/{id}', function ($id, Request $request) {
-    $report = Report::findOrFail($id);
-    $report->status = $request->status;
-    $report->save();
-    return redirect()->route('admin');
-})->name('admin.update');
+    Route::get('/admin', function (Request $request) {
 
-Route::delete('/admin/delete/{id}', function ($id) {
-    Report::findOrFail($id)->delete();
-    return redirect()->route('admin');
-})->name('admin.delete');
+        if (!Auth::check() || Auth::user()->admin !== 1) {
+            abort(403, 'Toegang geweigerd');
+        }
+
+        $sort = $request->query('sort', 'desc');
+        $reports = Report::orderBy('created_at', $sort)->get();
+        return view('admin', compact('reports', 'sort'));
+
+    })->name('admin');
+
+    Route::post('/admin/update/{id}', function ($id, Request $request) {
+        $report = Report::findOrFail($id);
+        $report->status = $request->status;
+        $report->save();
+        return redirect()->route('admin');
+    })->name('admin.update');
+
+    Route::post('/admin/update/{id}', function ($id, Request $request) {
+
+        if (!Auth::check() || Auth::user()->admin !== 1) {
+            abort(403);
+        }
+
+        $report = Report::findOrFail($id);
+        $report->status = $request->status;
+        $report->save();
+        return redirect()->route('admin');
+
+    })->name('admin.update');
+
+    Route::get('/admin', function (Request $request) {
+
+        if (!Auth::check() || Auth::user()->admin !== 1) {
+            abort(403, 'Toegang geweigerd');
+        }
+
+        $sort = $request->query('sort', 'desc');
+        $reports = Report::orderBy('created_at', $sort)->get();
+        return view('admin', compact('reports', 'sort'));
+
+    })->name('admin');
+});
 
