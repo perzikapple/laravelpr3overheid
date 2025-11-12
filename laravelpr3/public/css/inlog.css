@@ -5,7 +5,7 @@ body {
     background-color: #f3f4f6;
     margin: 0;
     padding-top: 70px; /* ruimte voor navbar */
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -54,6 +54,7 @@ input[type="password"] {
     border: 1px solid var(--color-border-light);
     border-radius: var(--radius-md);
     font-size: var(--font-size-base);
+    box-sizing: border-box;
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
@@ -73,7 +74,7 @@ button {
     border-radius: var(--radius-md);
     font-weight: var(--font-weight-semibold);
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 button:hover {
@@ -81,16 +82,44 @@ button:hover {
     transform: translateY(-1px);
 }
 
+button:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.error {
+    color: var(--color-error-text);
+    font-size: var(--font-size-sm);
+    margin-top: var(--sp-sm);
+}
+
 .register-link {
     text-align: center;
     margin-top: 15px;
+    font-size: var(--font-size-sm);
 }
 
 .register-link a {
     color: #2563eb;
     text-decoration: none;
+    font-weight: var(--font-weight-semibold);
 }
 
 .register-link a:hover {
     text-decoration: underline;
 }
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 60px;
+    }
+    
+    .main-content {
+        padding: var(--sp-md);
+    }
+    
+    .login-container {
+        padding: var(--sp-lg);
+    }
+}
+

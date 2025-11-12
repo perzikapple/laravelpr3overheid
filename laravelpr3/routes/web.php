@@ -51,7 +51,13 @@ Route::get('/bedankt', fn() => view('bedankt'))->name('bedankt');
 // -------------------------
 // LOGIN
 // -------------------------
-Route::get('/login', fn() => view('login'))->name('login');
+Route::get('/login', function () {
+    if (Auth::check()) {
+        return redirect()->route('home');
+    }
+    return view('login');
+})->name('login');
+
 Route::post('/login', function (Request $request) {
     $credentials = $request->only('email', 'password');
 
@@ -69,7 +75,12 @@ Route::post('/login', function (Request $request) {
 // -------------------------
 // REGISTRATIE
 // -------------------------
-Route::get('/register', fn() => view('register'))->name('register.form');
+Route::get('/register', function () {
+    if (Auth::check()) {
+        return redirect()->route('home');
+    }
+    return view('register');
+})->name('register.form');
 
 Route::post('/register', function (Request $request) {
     $request->validate([
@@ -78,11 +89,14 @@ Route::post('/register', function (Request $request) {
         'password' => 'required|string|min:8|confirmed',
     ]);
 
-    User::create([
+    $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
         'password' => Hash::make($request->password),
     ]);
+
+    // Automatisch inloggen na registratie
+    Auth::login($user);
 
     return redirect()->route('home')->with('success', 'Account aangemaakt!');
 })->name('register.post');
@@ -100,7 +114,7 @@ Route::middleware(['auth'])->group(function () {
 
         $sort = $request->query('sort', 'desc');
         $reports = Report::orderBy('created_at', $sort)->get();
-        return view('admin', compact('reports', 'sort'));
+        return view('adminpage', compact('reports', 'sort'));
     })->name('admin');
 
     Route::post('/admin/update/{id}', function ($id, Request $request) {
@@ -114,6 +128,17 @@ Route::middleware(['auth'])->group(function () {
 
         return redirect()->route('admin');
     })->name('admin.update');
+
+    Route::delete('/admin/delete/{id}', function ($id) {
+        if (!Auth::check() || Auth::user()->admin !== 1) {
+            abort(403);
+        }
+
+        $report = Report::findOrFail($id);
+        $report->delete();
+
+        return redirect()->route('admin')->with('success', 'Melding verwijderd');
+    })->name('admin.delete');
 
     Route::post('/logout', function (Request $request) {
         Auth::logout();

@@ -1,3 +1,5 @@
+@import 'variables.css';
+
 /* Algemene stijl */
 body {
     font-family: Arial, sans-serif;
@@ -18,8 +20,17 @@ body {
 
 /* Form labels */
 label {
+    display: block;
+    margin-top: 16px;
+    font-weight: bold;
     font-size: var(--font-size-sm);
     color: var(--color-text-muted);
+}
+
+/* Form groups with validation */
+.form-group {
+    position: relative;
+    margin-bottom: var(--sp-lg);
 }
 
 /* Form inputs, textarea en knoppen */
@@ -32,7 +43,13 @@ button {
     border: 1px solid var(--color-border-light);
     border-radius: var(--radius-md);
     font-size: var(--font-size-base);
+    box-sizing: border-box;
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input[type="file"] {
+    padding: var(--sp-sm);
+    cursor: pointer;
 }
 
 input[type="text"]:focus,
@@ -47,34 +64,49 @@ textarea:focus {
 textarea {
     min-height: 6rem;
     resize: vertical;
+    font-family: inherit;
 }
+
+/* Character counter for textarea */
+.char-counter {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    text-align: right;
+    margin-top: var(--sp-xs);
+}
+
 
 /* Knoppen */
 button {
-    background: #2563eb; /* Zelfde blauw als Tailwind navbar */
-    color: white;
+    background: #d1d5db;
+    color: #374151;
     border: none;
     border-radius: var(--radius-md);
     font-weight: var(--font-weight-semibold);
     cursor: pointer;
     margin-top: 18px;
-    transition: background 0.2s;
 }
 
-button:hover {
-    background: #1e40af;
+button:focus {
+    outline: 2px solid var(--color-border);
+    outline-offset: 2px;
 }
 
 /* Locatieknop (secundair) */
 #locateBtn {
-    background: #4b5563;
+    background: #d1d5db;
+    color: #374151;
     width: auto;
     margin-bottom: var(--sp-md);
     margin-top: 0;
 }
-
-#locateBtn:hover {
-    background: #374151;
+#submitBtn {
+    background: #d1d5db;
+    color: #374151;
+    width: 1500px;
+    height: 50px;
+    margin-bottom: var(--sp-md);
+    margin-top: 0;
 }
 
 /* Kaart */
@@ -83,7 +115,66 @@ button:hover {
     margin-top: var(--sp-lg);
     border-radius: var(--radius-md);
     border: 2px solid var(--color-border);
+    aspect-ratio: 16 / 9;
+    min-height: 300px;
 }
+
+/* Map loading state */
+#map.loading {
+    background: linear-gradient(
+        90deg,
+        #f0f0f0 0%,
+        #e0e0e0 20%,
+        #f0f0f0 40%,
+        #f0f0f0 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+}
+
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* File input enhancement */
+.file-input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.file-input-label {
+    display: inline-block;
+    padding: var(--sp-md);
+    background: var(--color-bg);
+    border: 2px dashed var(--color-border-light);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    text-align: center;
+    transition: border-color var(--transition-fast), background-color var(--transition-fast);
+    width: 100%;
+}
+
+.file-input-label:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+}
+
+.file-input-label.has-file {
+    border-color: var(--color-success);
+    background: var(--color-success-light);
+}
+
+input[type="file"] {
+    position: absolute;
+    left: -9999px;
+}
+
 
 /* Responsive design */
 @media (max-width: 600px) {
@@ -97,3 +188,4 @@ button:hover {
         width: 100%;
     }
 }
+

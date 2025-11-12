@@ -18,9 +18,9 @@
 <nav class="bg-blue-600 text-white p-4 flex justify-between items-center fixed top-0 left-0 w-full shadow-md z-50">
     <a href="{{ route('home') }}" class="font-bold text-lg">MijnSite</a>
 
-    <div class="space-x-4">
+    <div class="flex items-center space-x-4">
         @auth
-            @if (Auth::user()->admin)
+            @if (Auth::user()->admin == 1 || Auth::user()->admin === true)
                 <a href="{{ route('admin') }}" class="hover:underline">Admin</a>
             @endif
 
@@ -38,6 +38,8 @@
 <main class="p-6 pt-24">
     @yield('content')
 </main>
+
+<script src="{{ asset('js/ui-helpers.js') }}"></script>
 
 @stack('scripts')
 

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Components Demo</title>
+    <link rel="stylesheet" href="/css/variables.css">
+    <style>
+        body { padding: 80px 20px 40px; }
+        .demo-section {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .demo-section h2 {
+            margin-top: 0;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 0.5rem;
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="bg-blue-600 text-white p-4 flex justify-between items-center fixed top-0 left-0 w-full shadow-md z-50" style="background: var(--color-primary); color: white; padding: 1rem 2rem; position: fixed; top: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <strong>UI Components Demo</strong>
+        <a href="/" style="color: white;">← Terug naar Home</a>
+    </nav>
+
+    <!-- Toast Notifications -->
+    <div class="demo-section">
+        <h2>🔔 Toast Notifications</h2>
+        <p>Klik op de knoppen om toast meldingen te testen:</p>
+        <div class="demo-grid">
+            <button onclick="Toast.success('Actie succesvol uitgevoerd!')">Success Toast</button>
+            <button onclick="Toast.error('Er is een fout opgetreden')">Error Toast</button>
+            <button onclick="Toast.warning('Let op: dit is belangrijk')">Warning Toast</button>
+            <button onclick="Toast.info('Nieuwe informatie beschikbaar')">Info Toast</button>
+        </div>
+    </div>
+
+    <!-- Loading States -->
+    <div class="demo-section">
+        <h2>⏳ Loading States</h2>
+        
+        <h3>Spinners</h3>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+            <div class="spinner"></div>
+            <div class="spinner-lg"></div>
+            <span>Laden...</span>
+        </div>
+        
+        <h3 style="margin-top: 2rem;">Button Loading</h3>
+        <button id="loadingBtn" onclick="demoButtonLoading(this)">Klik voor Loading State</button>
+        
+        <h3 style="margin-top: 2rem;">Skeleton Loading</h3>
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-text"></div>
+        <div class="skeleton skeleton-text"></div>
+        <div class="skeleton skeleton-text" style="width: 80%;"></div>
+    </div>
+
+    <!-- Form Validation -->
+    <div class="demo-section">
+        <h2>✅ Form Validation</h2>
+        <form onsubmit="event.preventDefault(); Toast.success('Formulier verstuurd!');">
+            <div class="form-group">
+                <label>E-mail (verplicht)</label>
+                <input type="email" required placeholder="naam@voorbeeld.nl">
+            </div>
+            
+            <div class="form-group">
+                <label>Telefoonnummer (optioneel)</label>
+                <input type="tel" placeholder="06 12345678">
+            </div>
+            
+            <div class="form-group">
+                <label>Bericht (verplicht)</label>
+                <textarea required placeholder="Uw bericht..."></textarea>
+            </div>
+            
+            <button type="submit">Verzenden</button>
+        </form>
+    </div>
+
+    <!-- Badges -->
+    <div class="demo-section">
+        <h2>🏷️ Badges</h2>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <span class="badge badge-primary">Primary</span>
+            <span class="badge badge-success">Success</span>
+            <span class="badge badge-danger">Danger</span>
+            <span class="badge badge-warning">Warning</span>
+        </div>
+    </div>
+
+    <!-- Progress Bars -->
+    <div class="demo-section">
+        <h2>📊 Progress Bars</h2>
+        
+        <h3>Normal</h3>
+        <div class="progress">
+            <div class="progress-bar" style="width: 75%;"></div>
+        </div>
+        
+        <h3 style="margin-top: 1rem;">Animated</h3>
+        <div class="progress">
+            <div class="progress-bar animated" style="width: 60%;"></div>
+        </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="demo-section">
+        <h2>📭 Empty State</h2>
+        <div class="empty-state">
+            <div class="empty-state-icon">📋</div>
+            <div class="empty-state-title">Geen gegevens gevonden</div>
+            <div class="empty-state-message">Er zijn nog geen meldingen ingediend.</div>
+            <button>Nieuwe melding maken</button>
+        </div>
+    </div>
+
+    <!-- Grid Layout Demo -->
+    <div class="demo-section">
+        <h2>📐 CSS Grid Layout</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">127</div>
+                <div class="stat-label">Totaal Meldingen</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">45</div>
+                <div class="stat-label">Open</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">82</div>
+                <div class="stat-label">Afgehandeld</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/ui-helpers.js"></script>
+    <script>
+        function demoButtonLoading(btn) {
+            LoadingState.setButtonLoading(btn, true);
+            setTimeout(() => {
+                LoadingState.setButtonLoading(btn, false);
+                Toast.success('Actie voltooid!');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
