@@ -1,40 +1,35 @@
-<!doctype html>
-<html lang="nl">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/homepage.css">
-    <title>Inloggen</title>
-</head>
-<body>
+@extends('layouts.app')
 
-<div class="navbar">
-    <a href="{{ route('home') }}">Home</a>
-</div>
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+@endpush
 
-<div class="main-content">
-    <div class="login-container">
-        <h1>Inloggen</h1>
+@section('title', 'Inloggen')
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+@section('content')
+    <div class="main-content">
+        <div class="login-container">
+            <h1>Inloggen</h1>
 
-            <div class="form-group">
-                <label for="email">E-mailadres</label>
-                <input type="email" id="email" name="email" required>
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+
+                <div class="form-group">
+                    <label for="email">E-mailadres</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Wachtwoord</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <button type="submit">Inloggen</button>
+            </form>
+
+            <div class="register-link">
+                <a href="{{ route('register.form') }}">Nog geen account? Registreer hier</a>
             </div>
-
-            <div class="form-group">
-                <label for="password">Wachtwoord</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-
-            <button type="submit">Inloggen</button>
-        </form>
-
-        <a href="{{ route('register.form') }}">Registreer hier</a>
-
+        </div>
     </div>
-</div>
-</body>
-</html>
+@endsection

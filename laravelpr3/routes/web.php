@@ -4,15 +4,20 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use App\Models\Report;
 use App\Models\User;
 
-
+// -------------------------
+// HOMEPAGE
+// -------------------------
 Route::get('/', function () {
     return view('home');
 })->name('home');
 
+
+// -------------------------
+// RAPPORT INDIENEN
+// -------------------------
 Route::post('/report', function (Request $request) {
 
     $request->validate([
@@ -37,38 +42,40 @@ Route::post('/report', function (Request $request) {
         'photo_path' => $path
     ]);
 
-
     return redirect()->route('bedankt');
 })->name('report.store');
 
 Route::get('/bedankt', fn() => view('bedankt'))->name('bedankt');
 
 
+// -------------------------
 // LOGIN
-Route::get('/inlog', fn() => view('inlog'))->name('login.form');
-Route::post('/inlog', function (Request $request) {
-
+// -------------------------
+Route::get('/login', fn() => view('login'))->name('login');
+Route::post('/login', function (Request $request) {
     $credentials = $request->only('email', 'password');
 
     if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+
         return redirect()->route('home');
     }
 
-    return back()->withErrors(['email' => 'Login gegevens kloppen niet.']);
+    return back()->withErrors([
+        'email' => 'Ongeldige inloggegevens.',
+    ]);
 })->name('login');
 
-
-// REGISTRATION
+// -------------------------
+// REGISTRATIE
+// -------------------------
 Route::get('/register', fn() => view('register'))->name('register.form');
 
 Route::post('/register', function (Request $request) {
     $request->validate([
-        'description' => 'required|string|max:2000',
-        'email' => 'nullable|email|max:255',
-        'phone' => 'nullable|string|max:50',
-        'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:4096',
-        'latitude' => 'nullable|numeric',
-        'longitude' => 'nullable|numeric',
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|string|min:8|confirmed',
     ]);
 
     User::create([
@@ -81,11 +88,12 @@ Route::post('/register', function (Request $request) {
 })->name('register.post');
 
 
+// -------------------------
 // ADMIN
-Route::middleware(['auth', 'admin'])->group(function () {
+// -------------------------
+Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin', function (Request $request) {
-
         if (!Auth::check() || Auth::user()->admin !== 1) {
             abort(403, 'Toegang geweigerd');
         }
@@ -93,18 +101,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
         $sort = $request->query('sort', 'desc');
         $reports = Report::orderBy('created_at', $sort)->get();
         return view('admin', compact('reports', 'sort'));
-
     })->name('admin');
 
     Route::post('/admin/update/{id}', function ($id, Request $request) {
-        $report = Report::findOrFail($id);
-        $report->status = $request->status;
-        $report->save();
-        return redirect()->route('admin');
-    })->name('admin.update');
-
-    Route::post('/admin/update/{id}', function ($id, Request $request) {
-
         if (!Auth::check() || Auth::user()->admin !== 1) {
             abort(403);
         }
@@ -112,20 +111,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
         $report = Report::findOrFail($id);
         $report->status = $request->status;
         $report->save();
-        return redirect()->route('admin');
 
+        return redirect()->route('admin');
     })->name('admin.update');
 
-    Route::get('/admin', function (Request $request) {
+    Route::post('/logout', function (Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    })->name('logout');
 
-        if (!Auth::check() || Auth::user()->admin !== 1) {
-            abort(403, 'Toegang geweigerd');
-        }
-
-        $sort = $request->query('sort', 'desc');
-        $reports = Report::orderBy('created_at', $sort)->get();
-        return view('admin', compact('reports', 'sort'));
-
-    })->name('admin');
 });
-

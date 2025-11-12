@@ -2,32 +2,13 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f3f4f6;
     margin: 0;
+    padding-top: 70px; /* ruimte voor navbar */
     height: 100vh;
     display: flex;
-    flex-direction: column; /* Zorgt dat navbar bovenaan staat */
+    flex-direction: column;
 }
 
-/* --- NAVBAR --- */
-.navbar {
-    background: #222;
-    color: #fff;
-    padding: 12px 24px;
-    display: flex;
-    align-items: center;
-}
-
-.navbar a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    margin-right: 15px;
-}
-
-.navbar a:hover {
-    text-decoration: underline;
-}
-
-/* --- CENTREREN VAN LOGIN --- */
+/* --- MAIN CONTENT --- */
 .main-content {
     flex: 1; /* Vult resterende ruimte onder navbar */
     display: flex;
@@ -47,6 +28,7 @@ body {
 h1 {
     text-align: center;
     margin-bottom: 20px;
+    color: #1e293b;
 }
 
 .form-group {
@@ -76,18 +58,23 @@ button {
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 button:hover {
     background-color: #1e40af;
 }
 
-.error {
-    color: red;
-    font-size: 0.9em;
-}
-
 .register-link {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
+}
+
+.register-link a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
 }

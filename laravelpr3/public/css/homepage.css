@@ -1,28 +1,12 @@
+/* Algemene stijl */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     background: #eef2f3;
+    padding-top: 70px; /* ruimte voor vaste navbar */
 }
 
-.navbar {
-    background: #222;
-    color: #fff;
-    padding: 12px 24px;
-    display: flex;
-    align-items: center;
-}
-
-.navbar a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    margin-right: 15px;
-}
-
-.navbar a:hover {
-    text-decoration: underline;
-}
-
+/* Container voor de inhoud */
 .container {
     max-width: 480px;
     margin: 40px auto;
@@ -32,13 +16,17 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
+/* Form labels */
 label {
     display: block;
     margin-top: 16px;
     font-weight: bold;
 }
 
-input, textarea, button {
+/* Form inputs, textarea en knoppen */
+input,
+textarea,
+button {
     width: 100%;
     padding: 10px;
     margin-top: 6px;
@@ -53,27 +41,48 @@ textarea {
     resize: vertical;
 }
 
+/* Knoppen */
 button {
-    background: #2d7dff;
+    background: #2563eb; /* Zelfde blauw als Tailwind navbar */
     color: white;
     border: none;
     cursor: pointer;
     margin-top: 18px;
+    transition: background 0.2s;
 }
 
 button:hover {
-    background: #1c5fd6;
+    background: #1e40af;
 }
 
+/* Locatieknop (secundair) */
 #locateBtn {
-    background: #444;
+    background: #4b5563;
     width: auto;
     margin-bottom: 12px;
 }
 
+#locateBtn:hover {
+    background: #374151;
+}
+
+/* Kaart */
 #map {
     height: 350px;
     margin-top: 20px;
     border-radius: 8px;
     border: 2px solid #ccc;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .container {
+        margin: 20px;
+        padding: 16px;
+    }
+
+    button,
+    #locateBtn {
+        width: 100%;
+    }
 }

@@ -1,41 +1,27 @@
-.navbar {
-    background: #222;
-    color: #fff;
-    padding: 12px 24px;
-    display: flex;
-    align-items: center;
-}
-
-.navbar a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    margin-right: 15px;
-}
-
-.navbar a:hover {
-    text-decoration: underline;
-}
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f6f8;
+    margin: 0;
+    padding-top: 70px; /* ruimte voor navbar */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
+    min-height: 100vh;
 }
 
+/* ===== CONTAINER ===== */
 .container {
     background: white;
     padding: 2rem 3rem;
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
+    max-width: 500px;
+    width: 90%;
+    margin-top: 40px;
 }
 
+/* ===== TEKST ===== */
 h1 {
     color: #2c3e50;
 }
@@ -45,6 +31,7 @@ p {
     margin-bottom: 2rem;
 }
 
+/* ===== KNOP ===== */
 button {
     background-color: #007bff;
     color: white;

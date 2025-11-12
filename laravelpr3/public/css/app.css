@@ -7,5 +7,35 @@
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+
+
+nav {
+    @apply flex justify-between items-center bg-gray-100 px-5 py-3 fixed top-0 left-0 right-0 z-50 shadow;
+}
+
+nav a {
+    @apply text-gray-800 no-underline hover:underline;
+}
+
+nav .nav-left {
+    @apply flex gap-4;
+}
+
+nav .nav-right form {
+    @apply inline;
+}
+
+nav button {
+    @apply bg-transparent border-0 text-gray-800 cursor-pointer hover:underline;
+}
+
+main {
+    @apply mt-20 p-5;
+}
+
+body {
+    @apply font-sans bg-gray-50 text-gray-900;
 }
