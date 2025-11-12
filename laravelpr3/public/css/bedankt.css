@@ -1,29 +1,27 @@
-@import 'variables.css';
-
 body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding-top: 70px; /* ruimte voor navbar */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     min-height: 100vh;
-    background-color: var(--color-bg);
 }
 
-.navbar {
-    width: 100%;
-    box-shadow: var(--shadow-sm);
-}
-
+/* ===== CONTAINER ===== */
 .container {
     background: var(--color-white);
     padding: var(--sp-2xl) var(--sp-3xl);
     border-radius: var(--radius-2xl);
     box-shadow: var(--shadow-md);
     text-align: center;
-    max-width: 600px;
-    margin: var(--sp-xl);
+    max-width: 500px;
+    width: 90%;
+    margin-top: 40px;
 }
 
+/* ===== TEKST ===== */
 h1 {
     color: var(--color-text-primary);
     margin: 0 0 var(--sp-md);
@@ -35,6 +33,7 @@ p {
     font-size: var(--font-size-lg);
 }
 
+/* ===== KNOP ===== */
 button {
     background-color: var(--color-primary);
     color: var(--color-text-inverse);

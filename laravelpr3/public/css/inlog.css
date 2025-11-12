@@ -1,14 +1,13 @@
 @import 'variables.css';
 
 body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding-top: 70px; /* ruimte voor navbar */
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-}
-
-/* --- NAVBAR --- */
-.navbar {
-    box-shadow: var(--shadow-sm);
 }
 
 /* --- MAIN CONTENT --- */
@@ -32,8 +31,8 @@ body {
 
 h1 {
     text-align: center;
-    margin-bottom: var(--sp-xl);
-    color: var(--color-text-primary);
+    margin-bottom: 20px;
+    color: #1e293b;
 }
 
 .form-group {
@@ -74,8 +73,7 @@ button {
     border-radius: var(--radius-md);
     font-weight: var(--font-weight-semibold);
     cursor: pointer;
-    transition: background-color var(--transition-fast), transform var(--transition-fast);
-    font-size: 16px;
+    transition: background-color 0.2s ease;
 }
 
 button:hover {
@@ -83,35 +81,16 @@ button:hover {
     transform: translateY(-1px);
 }
 
-button:focus {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
-}
-
-.error {
-    color: var(--color-error-text);
-    font-size: var(--font-size-sm);
-    margin-top: var(--sp-sm);
-}
-
 .register-link {
     text-align: center;
-    margin-top: var(--sp-lg);
-    font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
+    margin-top: 15px;
 }
 
 .register-link a {
-    color: var(--color-primary);
-    font-weight: var(--font-weight-semibold);
+    color: #2563eb;
+    text-decoration: none;
 }
 
-@media (max-width: 480px) {
-    .main-content {
-        padding: var(--sp-md);
-    }
-    
-    .login-container {
-        padding: var(--sp-lg);
-    }
+.register-link a:hover {
+    text-decoration: underline;
 }

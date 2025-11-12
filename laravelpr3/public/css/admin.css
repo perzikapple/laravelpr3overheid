@@ -1,54 +1,76 @@
 @import 'variables.css';
 
 body {
-    background-color: var(--color-bg-subtle);
+    font-family: Arial, sans-serif;
+    background-color: #f6f7fb;
+    margin: 0;
+    padding-top: 90px; /* ruimte voor navbar */
 }
 
+/* Container */
 .container {
-    padding: var(--sp-xl);
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
+/* Titel */
 h1 {
-    margin-bottom: var(--sp-md);
+    margin-bottom: 1.5rem;
+    color: #1f2937;
 }
 
+/* Sorteeroptie */
+.sort-form {
+    margin-bottom: 1rem;
+}
+
+.sort-form select {
+    padding: 0.4rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* Tabel */
 table {
     width: 100%;
     border-collapse: collapse;
-    background: var(--color-white);
-    box-shadow: var(--shadow-md);
-    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
     overflow: hidden;
 }
 
 th, td {
-    padding: 0.75rem var(--sp-md);
-    border-bottom: 1px solid var(--color-border);
+    padding: 0.9rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
 }
 
 th {
     background-color: #f1f1f1;
-    font-weight: var(--font-weight-semibold);
-    text-align: left;
+    font-weight: bold;
 }
 
 tr:hover {
-    background-color: rgba(37, 99, 235, 0.02);
+    background-color: #f9fafb;
 }
 
-button {
-    background-color: var(--color-danger);
-    color: var(--color-text-inverse);
+/* Actieknoppen */
+button,
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
     border: none;
-    padding: var(--sp-sm) var(--sp-md);
-    border-radius: var(--radius-sm);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
     cursor: pointer;
-    font-weight: var(--font-weight-semibold);
-    transition: background-color var(--transition-fast);
+    transition: background 0.2s ease;
 }
 
-button:hover {
-    background-color: var(--color-danger-hover);
+button:hover,
+.delete-btn:hover {
+    background-color: #c82333;
 }
 
 button:focus {
@@ -57,25 +79,19 @@ button:focus {
 }
 
 select {
-    padding: var(--sp-sm);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-border-light);
-    cursor: pointer;
-    transition: border-color var(--transition-fast);
+    padding: 0.3rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
 }
 
-select:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-.sort-form {
-    margin-bottom: var(--sp-lg);
-    padding: var(--sp-lg);
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
+/* Responsive tabel */
+@media (max-width: 768px) {
+    table {
+        font-size: 0.85rem;
+    }
+    th, td {
+        padding: 0.6rem;
+    }
 }
 
 @media (max-width: 768px) {

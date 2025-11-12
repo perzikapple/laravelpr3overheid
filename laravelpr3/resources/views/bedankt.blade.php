@@ -1,26 +1,18 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/bedankt.css">
-    <title>Bedankt</title>
-</head>
-<body>
+@extends('layouts.app')
 
-<div class="navbar">
-    <a href="{{ route('login') }}">Login</a>
-</div>
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/bedankt.css') }}">
+@endpush
 
-<div class="container">
-    <h1>Bedankt voor je melding!</h1>
-    <p>We hebben je melding goed ontvangen en gaan ermee aan de slag.</p>
+@section('title', 'Bedankt')
 
-    <form action="{{ route('home') }}">
-        <button>Nog een melding maken?</button>
-    </form>
+@section('content')
+    <div class="container">
+        <h1>Bedankt voor je melding!</h1>
+        <p>We hebben je melding goed ontvangen en gaan ermee aan de slag.</p>
 
-</div>
-
-</body>
-</html>
+        <form action="{{ route('home') }}">
+            <button type="submit">Nog een melding maken?</button>
+        </form>
+    </div>
+@endsection

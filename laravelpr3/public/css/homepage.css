@@ -1,46 +1,31 @@
-@import 'variables.css';
-
+/* Algemene stijl */
 body {
-    background: var(--color-bg-light);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #eef2f3;
+    padding-top: 70px; /* ruimte voor vaste navbar */
 }
 
-.navbar {
-    box-shadow: var(--shadow-sm);
-}
-
-.page-wrapper {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--sp-lg);
-}
-
+/* Container voor de inhoud */
 .container {
-    width: 100%;
     max-width: 480px;
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    padding: var(--sp-xl);
+    margin: 40px auto;
+    padding: 24px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.form-group {
-    margin-bottom: var(--sp-lg);
-}
-
+/* Form labels */
 label {
     font-size: var(--font-size-sm);
     color: var(--color-text-muted);
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-textarea {
+/* Form inputs, textarea en knoppen */
+input,
+textarea,
+button {
     width: 100%;
     padding: var(--sp-md);
     margin-top: var(--sp-sm);
@@ -64,40 +49,35 @@ textarea {
     resize: vertical;
 }
 
+/* Knoppen */
 button {
-    width: 100%;
-    padding: var(--sp-md);
-    background: var(--color-primary);
-    color: var(--color-text-inverse);
+    background: #2563eb; /* Zelfde blauw als Tailwind navbar */
+    color: white;
     border: none;
     border-radius: var(--radius-md);
     font-weight: var(--font-weight-semibold);
     cursor: pointer;
-    margin-top: var(--sp-lg);
-    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    margin-top: 18px;
+    transition: background 0.2s;
 }
 
 button:hover {
-    background: var(--color-primary-hover);
-    transform: translateY(-1px);
+    background: #1e40af;
 }
 
-button:focus {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
-}
-
-button#locateBtn {
-    background: var(--color-dark);
+/* Locatieknop (secundair) */
+#locateBtn {
+    background: #4b5563;
     width: auto;
     margin-bottom: var(--sp-md);
     margin-top: 0;
 }
 
-button#locateBtn:hover {
-    background: var(--color-dark-light);
+#locateBtn:hover {
+    background: #374151;
 }
 
+/* Kaart */
 #map {
     height: 350px;
     margin-top: var(--sp-lg);
@@ -105,16 +85,15 @@ button#locateBtn:hover {
     border: 2px solid var(--color-border);
 }
 
-@media (max-width: 480px) {
-    .page-wrapper {
-        padding: var(--sp-md);
-    }
-    
+/* Responsive design */
+@media (max-width: 600px) {
     .container {
-        padding: var(--sp-lg);
+        margin: 20px;
+        padding: 16px;
     }
-    
-    button {
-        font-size: 16px;
+
+    button,
+    #locateBtn {
+        width: 100%;
     }
 }
