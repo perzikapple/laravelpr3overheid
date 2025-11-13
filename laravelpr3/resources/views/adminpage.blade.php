@@ -153,10 +153,18 @@
 
             // Initialiseer de kaart voor admin
             @if($reports->where('latitude', '!=', null)->count() > 0)
-            const adminMap = L.map('adminMap').setView([51.9225, 4.47917], 12); // Rotterdam centrum
+            const adminMap = L.map('adminMap', {
+                minZoom: 11,
+                maxZoom: 18,
+                maxBounds: [
+                    [51.8, 4.3],   // Zuidwest hoek van Rotterdam
+                    [52.0, 4.65]    // Noordoost hoek van Rotterdam
+                ]
+            }).setView([51.9225, 4.47917], 12); // Rotterdam centrum
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
+            L.tileLayer('https://service.pdok.nl/brt/achtergrondkaart/wmts/v2_0/standaard/EPSG:3857/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: 'Kaartgegevens &copy; <a href="https://www.kadaster.nl">Kadaster</a>'
             }).addTo(adminMap);
 
             // Voeg alle meldingen toe als markers
