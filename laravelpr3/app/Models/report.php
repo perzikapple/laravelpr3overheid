@@ -13,6 +13,8 @@ class Report extends Model
     protected $fillable = [
         'title',
         'description',
+        'email',
+        'phone',
         'latitude',
         'longitude',
         'photo_path',

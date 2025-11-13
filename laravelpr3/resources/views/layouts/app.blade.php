@@ -12,11 +12,11 @@
 
     @stack('styles')
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100 font-sans" style="background-color: #f8f9fa;">
 
 
-<nav class="bg-blue-600 text-white p-4 flex justify-between items-center fixed top-0 left-0 w-full shadow-md z-50">
-    <a href="{{ route('home') }}" class="font-bold text-lg">MijnSite</a>
+<nav style="background-color: #00811f;" class="text-white p-4 flex justify-between items-center fixed top-0 left-0 w-full shadow-md z-50">
+    <a href="{{ route('home') }}" class="font-bold text-lg"><img src="{{ asset('share-image-rotterdam.jpg') }}" alt="Logo" class="h-16"></a>
 
     <div class="flex items-center space-x-4">
         @auth

@@ -1,22 +1,22 @@
 /* ===== CSS CUSTOM PROPERTIES ===== */
 :root {
-    /* Colors - Brand & Semantic (Light Mode) */
-    --color-primary: #2563eb;
-    --color-primary-hover: #1e40af;
-    --color-primary-light: #dbeafe;
+    /* Colors - Gemeente Rotterdam Huisstijl */
+    --color-primary: #00811f;
+    --color-primary-hover: #006618;
+    --color-primary-light: #d4f4dd;
     
     --color-danger: #dc3545;
     --color-danger-hover: #c82333;
     
-    --color-success: #10b981;
-    --color-success-hover: #059669;
-    --color-success-light: #d1fae5;
+    --color-success: #00811f;
+    --color-success-hover: #006618;
+    --color-success-light: #d4f4dd;
     
     --color-warning: #f59e0b;
     --color-warning-light: #fef3c7;
     
-    --color-info: #3b82f6;
-    --color-info-light: #dbeafe;
+    --color-info: #00a8e1;
+    --color-info-light: #d0f0fc;
     
     --color-dark: #222;
     --color-dark-light: #444;
