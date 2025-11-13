@@ -2,35 +2,80 @@
 
 /* Algemene stijl */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Breeserif', Georgia, serif;
     margin: 0;
-    background: #eef2f3;
-    padding-top: 70px; /* ruimte voor vaste navbar */
+    background: #ffffff;
 }
 
 /* Container voor de inhoud */
 .container {
-    max-width: 480px;
-    margin: 40px auto;
-    padding: 24px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Gemeente Rotterdam Content Containers */
+.gov-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    padding: 40px;
+}
+
+.gov-header {
+    border-left: 4px solid #00811f;
+    padding-left: 20px;
+    margin-bottom: 30px;
+}
+
+.gov-header h1 {
+    color: #00811f;
+    font-size: 32px;
+    margin: 0 0 8px 0;
+    font-weight: 700;
+}
+
+.gov-header p {
+    color: #666;
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.info-box {
+    background: #f0f8f4;
+    border-left: 4px solid #00811f;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 4px;
+}
+
+.info-box h3 {
+    color: #00811f;
+    margin: 0 0 12px 0;
+    font-size: 18px;
+}
+
+.info-box ul {
+    margin: 0;
+    padding-left: 20px;
+    color: #555;
+    line-height: 1.8;
 }
 
 /* Form labels */
 label {
     display: block;
     margin-top: 16px;
-    font-weight: bold;
-    font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
+    font-weight: 600;
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 6px;
 }
 
 /* Form groups with validation */
 .form-group {
     position: relative;
-    margin-bottom: var(--sp-lg);
+    margin-bottom: 24px;
 }
 
 /* Form inputs, textarea en knoppen */
@@ -38,13 +83,20 @@ input,
 textarea,
 button {
     width: 100%;
-    padding: var(--sp-md);
-    margin-top: var(--sp-sm);
-    border: 1px solid var(--color-border-light);
-    border-radius: var(--radius-md);
-    font-size: var(--font-size-base);
+    padding: 12px 16px;
+    border: 2px solid #d0d0d0;
+    border-radius: 4px;
+    font-size: 16px;
     box-sizing: border-box;
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: 'Breeserif', Georgia, serif;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #00811f;
+    box-shadow: 0 0 0 3px rgba(0, 129, 31, 0.1);
 }
 
 input[type="file"] {
@@ -62,59 +114,78 @@ textarea:focus {
 }
 
 textarea {
-    min-height: 6rem;
+    min-height: 120px;
     resize: vertical;
-    font-family: inherit;
+    font-family: 'Breeserif', Georgia, serif;
 }
 
 /* Character counter for textarea */
 .char-counter {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
+    font-size: 14px;
+    color: #666;
     text-align: right;
-    margin-top: var(--sp-xs);
+    margin-top: 4px;
 }
 
 
-/* Knoppen */
+/* Knoppen - Gemeente Rotterdam stijl */
 button {
-    background: #d1d5db;
-    color: #374151;
+    background: #00811f;
+    color: white;
     border: none;
-    border-radius: var(--radius-md);
-    font-weight: var(--font-weight-semibold);
+    border-radius: 4px;
+    font-weight: 700;
     cursor: pointer;
     margin-top: 18px;
+    font-size: 16px;
+    padding: 14px 24px;
+    transition: background-color 0.2s;
+    font-family: 'Breeserif', Georgia, serif;
+}
+
+button:hover {
+    background: #006618;
 }
 
 button:focus {
-    outline: 2px solid var(--color-border);
+    outline: 3px solid rgba(0, 129, 31, 0.3);
     outline-offset: 2px;
 }
 
 /* Locatieknop (secundair) */
 #locateBtn {
-    background: #d1d5db;
-    color: #374151;
+    background: white;
+    color: #00811f;
+    border: 2px solid #00811f;
     width: auto;
-    margin-bottom: var(--sp-md);
+    margin-bottom: 0;
     margin-top: 0;
 }
+
+#locateBtn:hover {
+    background: #f0f8f4;
+}
+
 #submitBtn {
-    background: #d1d5db;
-    color: #374151;
-    width: 1500px;
-    height: 50px;
-    margin-bottom: var(--sp-md);
+    background: #00811f;
+    color: white;
+    width: 100%;
+    height: auto;
+    padding: 14px 24px;
+    margin-bottom: 0;
     margin-top: 0;
+}
+
+#submitBtn:hover {
+    background: #006618;
 }
 
 /* Kaart */
 #map {
-    height: 350px;
-    margin-top: var(--sp-lg);
-    border-radius: var(--radius-md);
-    border: 2px solid var(--color-border);
+    height: 450px;
+    margin-top: 30px;
+    border-radius: 4px;
+    border: 2px solid #d0d0d0;
     aspect-ratio: 16 / 9;
     min-height: 300px;
 }

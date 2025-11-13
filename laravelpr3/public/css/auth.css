@@ -1,0 +1,130 @@
+/* Gemeente Rotterdam Auth Styling */
+
+.gov-auth-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 50px;
+}
+
+.gov-auth-container h1 {
+    color: #00811f;
+    font-size: 28px;
+    margin: 0 0 8px 0;
+    font-weight: 700;
+    border-left: 4px solid #00811f;
+    padding-left: 16px;
+}
+
+.gov-auth-container p {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 15px;
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #d0d0d0;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: 'Breeserif', Georgia, serif;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #00811f;
+    box-shadow: 0 0 0 3px rgba(0, 129, 31, 0.1);
+}
+
+.form-group small {
+    color: #666;
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+/* Error Messages */
+.error-message {
+    color: #dc3545;
+    font-size: 14px;
+    display: block;
+    margin-top: 6px;
+}
+
+.alert-error {
+    background: #fff4f4;
+    color: #9b1c1c;
+    padding: 16px;
+    border-radius: 4px;
+    margin-bottom: 24px;
+    border-left: 4px solid #dc3545;
+}
+
+.alert-error strong {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.alert-error ul {
+    margin: 8px 0 0 20px;
+}
+
+/* Buttons */
+.btn {
+    width: 100%;
+    background: #00811f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 14px 24px;
+    transition: background-color 0.2s;
+    font-family: 'Breeserif', Georgia, serif;
+}
+
+.btn:hover {
+    background: #006618;
+}
+
+.btn:focus {
+    outline: 3px solid rgba(0, 129, 31, 0.3);
+    outline-offset: 2px;
+}
+
+/* Auth Footer Text */
+.auth-footer {
+    text-align: center;
+    margin-top: 24px;
+    color: #666;
+    font-size: 15px;
+}
+
+.auth-footer a {
+    color: #00811f;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}

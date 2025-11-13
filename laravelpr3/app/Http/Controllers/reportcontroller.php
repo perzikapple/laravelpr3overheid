@@ -13,9 +13,18 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         $sort = $request->query('sort', 'desc');
-        $reports = Report::orderBy('created_at', $sort)->get();
+        $search = $request->query('search');
+        
+        $query = Report::query();
+        
+        // Zoek op ID als search parameter is meegegeven
+        if ($search) {
+            $query->where('id', $search);
+        }
+        
+        $reports = $query->orderBy('created_at', $sort)->get();
 
-        return view('admin', compact('reports', 'sort'));
+        return view('adminpage', compact('reports', 'sort'));
     }
 
     /**

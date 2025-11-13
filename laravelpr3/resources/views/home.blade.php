@@ -5,11 +5,25 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 @endpush
 
-@section('title', 'Melding doen')
+@section('title', 'Melding maken - Gemeente Rotterdam')
+@section('breadcrumb', 'Melding openbare ruimte')
 
-    @section('content')
-        <div class="container">
-            <h2>Doe een melding</h2>
+@section('content')
+    <div class="gov-container">
+        <div class="gov-header">
+            <h1>Melding openbare ruimte</h1>
+            <p>Ziet u iets in de openbare ruimte dat niet klopt? Zoals een kapotte stoep, zwerfafval of een defecte straatlantaarn? Doe hier uw melding.</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>ℹ️ Wat kunt u melden?</h3>
+            <ul>
+                <li>Beschadigingen aan straten, stoepen en fietspaden</li>
+                <li>Kapotte lantaarnpalen of verkeersborden</li>
+                <li>Overlast door zwerfvuil of graffiti</li>
+                <li>Problemen met groen en bomen</li>
+            </ul>
+        </div>
 
             <form method="POST" action="{{ route('report.store') }}" enctype="multipart/form-data" id="reportForm">
                 @csrf
@@ -48,8 +62,11 @@
                     <button type="submit" id="submitBtn">Verstuur Melding</button>
                 </div>
             </form>
+        </div>
 
-            <div id="map" style="height: 500px; margin-top: 24px; border-radius: 8px;" class="skeleton"></div>
+        <div style="background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 40px; margin-top: 30px;">
+            <h2 style="color: #00811f; font-size: 24px; margin: 0 0 20px 0; font-weight: 700; border-left: 4px solid #00811f; padding-left: 16px;">Locatie op de kaart</h2>
+            <div id="map" style="height: 500px; border-radius: 4px; border: 2px solid #d0d0d0;"></div>
         </div>
     @endsection
 

@@ -5,47 +5,65 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 @endpush
 
-@section('title', 'Admin Dashboard')
+@section('title', 'Beheer - Gemeente Rotterdam')
+@section('breadcrumb', 'Meldingen beheren')
 
 @section('content')
-    <div class="container">
-        <div class="admin-header">
-            <div>
-                <h1>Admin Dashboard</h1>
-                <p style="color: var(--color-text-secondary); margin-top: 0.5rem;">Beheer alle meldingen</p>
-            </div>
-            
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value">{{ $reports->where('status', 'open')->count() }}</div>
-                    <div class="stat-label">Open</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">{{ $reports->where('status', 'working')->count() }}</div>
-                    <div class="stat-label">In behandeling</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">{{ $reports->where('status', 'resolved')->count() }}</div>
-                    <div class="stat-label">Opgelost</div>
-                </div>
+    <div class="gov-admin-header">
+        <h1>Meldingen beheren</h1>
+        <p style="color: #666; margin: 8px 0 0 0; font-size: 16px;">Overzicht en beheer van alle openbare ruimte meldingen</p>
+    </div>
+    
+    <div class="gov-stats-grid">
+        <div class="gov-stat-card">
+            <div class="gov-stat-value">{{ $reports->where('status', 'open')->count() }}</div>
+            <div class="gov-stat-label">Open</div>
+        </div>
+        <div class="gov-stat-card">
+            <div class="gov-stat-value">{{ $reports->where('status', 'working')->count() }}</div>
+            <div class="gov-stat-label">In behandeling</div>
+        </div>
+        <div class="gov-stat-card">
+            <div class="gov-stat-value">{{ $reports->where('status', 'resolved')->count() }}</div>
+            <div class="gov-stat-label">Opgelost</div>
+        </div>
+    </div>
+
+    <!-- Kaart met alle meldingen -->
+    @if($reports->where('latitude', '!=', null)->count() > 0)
+    <div class="gov-section">
+        <h2>Meldingen op kaart</h2>
+        <div id="adminMap" style="height: 500px; border-radius: 4px; border: 2px solid #d0d0d0;"></div>
+    </div>
+    @endif
+
+    <div class="gov-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 20px; flex-wrap: wrap;">
+            <h2 style="margin: 0;">Alle meldingen</h2>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <!-- Zoekfunctie -->
+                <form method="GET" action="{{ route('admin') }}" style="margin: 0; display: flex; gap: 8px; align-items: center;">
+                    <input type="text" name="search" placeholder="Zoek op ID..." value="{{ request('search') }}" style="padding: 8px 12px; border: 2px solid #d0d0d0; border-radius: 4px; font-size: 14px; width: 150px;">
+                    <input type="hidden" name="sort" value="{{ $sort }}">
+                    <button type="submit" style="padding: 8px 16px; background: #00811f; color: white; border: none; border-radius: 4px; font-size: 14px; cursor: pointer; font-weight: 600;">Zoeken</button>
+                    @if(request('search'))
+                        <a href="{{ route('admin') }}?sort={{ $sort }}" style="padding: 8px 16px; background: #666; color: white; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: 600;">Reset</a>
+                    @endif
+                </form>
+                
+                <!-- Sorteer -->
+                <form method="GET" action="{{ route('admin') }}" style="margin: 0;">
+                    @if(request('search'))
+                        <input type="hidden" name="search" value="{{ request('search') }}">
+                    @endif
+                    <label for="sort" style="margin-right: 8px; font-size: 14px; color: #666;">Sorteer:</label>
+                    <select name="sort" id="sort" onchange="this.form.submit()" style="padding: 8px 12px; border: 2px solid #d0d0d0; border-radius: 4px; font-size: 14px; background: white; cursor: pointer;">
+                        <option value="desc" {{ $sort == 'desc' ? 'selected' : '' }}>Nieuwste eerst</option>
+                        <option value="asc" {{ $sort == 'asc' ? 'selected' : '' }}>Oudste eerst</option>
+                    </select>
+                </form>
             </div>
         </div>
-
-        <!-- Kaart met alle meldingen -->
-        @if($reports->where('latitude', '!=', null)->count() > 0)
-        <div style="margin-bottom: 2rem;">
-            <h2 style="margin-bottom: 1rem;">Meldingen op kaart</h2>
-            <div id="adminMap" style="height: 500px; border-radius: 8px; border: 2px solid var(--color-border);"></div>
-        </div>
-        @endif
-
-        <form method="GET" action="{{ route('admin') }}" class="sort-form">
-            <label for="sort">Sorteer op datum:</label>
-            <select name="sort" id="sort" onchange="this.form.submit()">
-                <option value="desc" {{ $sort == 'desc' ? 'selected' : '' }}>Nieuwste eerst</option>
-                <option value="asc" {{ $sort == 'asc' ? 'selected' : '' }}>Oudste eerst</option>
-            </select>
-        </form>
 
         @if($reports->count() > 0)
         <div class="table-container">
@@ -89,7 +107,7 @@
                         <td>
                             @if($report->latitude && $report->longitude)
                                 <a href="https://www.google.com/maps?q={{ $report->latitude }},{{ $report->longitude }}" target="_blank" class="badge badge-primary" style="white-space: nowrap;">
-                                    📍 Bekijk kaart
+                                    📍 Bekijk op Google Maps
                                 </a>
                             @else
                                 <span style="color: var(--color-text-muted);">Geen locatie</span>
@@ -135,7 +153,12 @@
         <div class="empty-state">
             <div class="empty-state-icon">📋</div>
             <div class="empty-state-title">Geen meldingen gevonden</div>
-            <div class="empty-state-message">Er zijn nog geen meldingen ingediend.</div>
+            @if(request('search'))
+                <div class="empty-state-message">Geen melding gevonden met ID: {{ request('search') }}</div>
+                <a href="{{ route('admin') }}?sort={{ $sort }}" style="display: inline-block; margin-top: 16px; padding: 10px 20px; background: #00811f; color: white; text-decoration: none; border-radius: 4px; font-weight: 600;">Alle meldingen tonen</a>
+            @else
+                <div class="empty-state-message">Er zijn nog geen meldingen ingediend.</div>
+            @endif
         </div>
         @endif
     </div>

@@ -113,7 +113,17 @@ Route::middleware(['auth'])->group(function () {
         }
 
         $sort = $request->query('sort', 'desc');
-        $reports = Report::orderBy('created_at', $sort)->get();
+        $search = $request->query('search');
+        
+        $query = Report::query();
+        
+        // Zoek op ID als search parameter is meegegeven
+        if ($search) {
+            $query->where('id', $search);
+        }
+        
+        $reports = $query->orderBy('created_at', $sort)->get();
+        
         return view('adminpage', compact('reports', 'sort'));
     })->name('admin');
 
